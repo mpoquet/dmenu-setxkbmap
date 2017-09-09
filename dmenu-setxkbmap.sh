@@ -11,7 +11,6 @@ fi
 
 # Call dmenu and get the user selection
 choice=$(echo "${LAYOUTS}" | dmenu "$@")
-echo "Choice: #${choice}#"
 
 # Finally call setxkbmap
 setxkbmap ${choice}

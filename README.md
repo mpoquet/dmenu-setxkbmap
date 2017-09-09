@@ -2,19 +2,18 @@
 which allows to set X11 keyboard layouts.
 
 ### Usage
-Run ``dmenu-setxkbmap.sh``, select your layout then press Return.
+Run ``dmenu-setxkbmap.sh``, select your layout then press the Return key.
 
-As arguments are forwarded to dmenu, the call can be customized.  
-Please refer to the [dmenu manual][man dmenu] for a list of the available
-options.
+The script arguments are forwarded to dmenu.
+Please refer to the [dmenu manual][man dmenu] for listing all available options.
 
 [man dmenu]: https://man.cx/dmenu
 
 ### User-defined layouts
-`dmenu-setxkbmap` proposes all available X11 layouts by default.
+By default, `dmenu-setxkbmap` lists all available X11 layouts.
 
-This behavior can be customized by defining a list of newline-separated
-`setxkbmap` entries in the LAYOUTS variable.  
+This behavior can be customized by defining the ``LAYOUTS`` variable.  
+Entries must be newline-separated and valid regarding setxkbmap.  
 For example, the following bash call only proposes the qwerty,
 azerty and bépo layouts:
 

@@ -1,8 +1,11 @@
 `dmenu-setxkbmap` is a simple dmenu wrapper for setxkbmap,
 which allows to set X11 keyboard layouts.
 
+### Install
+``make install``
+
 ### Usage
-Run ``dmenu-setxkbmap.sh``, select your layout then press the Return key.
+Run ``dmenu-setxkbmap``, select your layout then press the Return key.
 
 The script arguments are forwarded to dmenu.
 Please refer to the [dmenu manual][man dmenu] for listing all available options.

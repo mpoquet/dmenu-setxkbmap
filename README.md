@@ -21,5 +21,5 @@ For example, the following bash call only proposes the qwerty,
 azerty and bépo layouts:
 
 ``` bash
-LAYOUTS=$'us\nfr\nfr bepo' ./dmenu-setxkbmap.sh
+LAYOUTS=$'us\nfr\nfr bepo' dmenu-setxkbmap
 ```

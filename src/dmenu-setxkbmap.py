@@ -50,7 +50,7 @@ def swap_first_input_if_current(curr_layout, in_layouts):
             layouts[0], layouts[1] = layouts[1], layouts[0]
     return layouts
 
-def dmenu_setxkbmap():
+def dmenu_setxkbmap(force_space_keymap=True):
     """Script main function.
 
     1. Generate a dmenu input
@@ -73,6 +73,11 @@ def dmenu_setxkbmap():
         returncode, _ = subprocess.getstatusoutput('setxkbmap {layout}'.format(
             layout=choice))
         success = (returncode == 0)
+
+        if success and force_space_keymap:
+            # Force keymap of the space keycode
+            code, _ = subprocess.getstatusoutput('xmodmap -e "keycode 65 = space space space space underscore underscore space space"')
+            success = (code == 0)
     else:
         success = False
 

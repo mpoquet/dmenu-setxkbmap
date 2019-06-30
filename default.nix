@@ -6,7 +6,7 @@ let
   jobs = rec {
     dmenu_setxkbmap = pkgs.stdenv.mkDerivation rec {
       pname = "dmenu-setxkbmap";
-      version = "0.2.0";
+      version = "0.3.0";
 
       buildInputs = with pkgs; [
         dmenu

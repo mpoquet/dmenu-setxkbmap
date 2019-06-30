@@ -8,7 +8,6 @@ import sys
 
 dmenu_command = "dmenu"
 setxkbmap_command = "setxkbmap"
-localectl_command = "localectl"
 
 def current_layout():
     """Gets the current layout (as LAYOUT[ VARIANT])."""

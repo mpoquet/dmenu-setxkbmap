@@ -30,20 +30,12 @@ def current_layout():
 
     return layout
 
-def default_x11_layouts():
-    """Gets system's default layouts."""
-    full_cmd = f"{localectl_command} list-x11-keymap-layouts"
-    code, output = subprocess.getstatusoutput(full_cmd)
-    if code != 0:
-        raise Exception(f"'{full_cmd}' failed")
-    return output
-
 def input_layouts():
     """ Retrieve script input layouts."""
     if "LAYOUTS" in os.environ:
         as_string = os.environ["LAYOUTS"]
     else:
-        as_string = default_x11_layouts()
+        raise Exception("LAYOUTS must be set. Try LAYOUTS=$'fr\\nfr bepo\\nus' {script}".format(script=sys.argv[0]))
 
     return as_string.split('\n')
 

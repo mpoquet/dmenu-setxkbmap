@@ -5,10 +5,15 @@ The format is based on [Keep a Changelog][changelog]
 and this project adheres to [Semantic Versioning][semver].
 
 [//]: ==========================================================================
+## [Unreleased]
+### Changed
+- Setting the LAYOUTS environment variable is now mandatory.
+
+[//]: ==========================================================================
 ## [0.2.0] - 2018-07-07
 ### Added
 - Now avoids to propose the current layout as the default dmenu choice.  
-  This increases ergonomy, as toggling between two layout if way faster now.
+  This increases ergonomy, as toggling between two layout is way faster now.
 
 ### Changed
 - Script is now in python.

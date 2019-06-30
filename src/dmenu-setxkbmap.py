@@ -6,31 +6,36 @@ import subprocess
 import re
 import sys
 
+dmenu_command = "dmenu"
+setxkbmap_command = "setxkbmap"
+localectl_command = "localectl"
+
 def current_layout():
     """Gets the current layout (as LAYOUT[ VARIANT])."""
-    code, output = subprocess.getstatusoutput("setxkbmap -query")
+    full_cmd = f"{setxkbmap_command} -query"
+    code, output = subprocess.getstatusoutput(full_cmd)
     if code != 0:
-        raise Exception("'setxkbmap -query' failed")
+        raise Exception(f"'{full_cmd}' failed")
 
     match_layout = re.search(r"layout:\s+(\S+)", output)
     if match_layout:
         layout = match_layout.group(1)
     else:
-        raise Exception("Cannot retrieve layout in setxkbmap -query result")
+        raise Exception(f"Cannot retrieve layout in '{full_cmd}' result")
 
     match_variant = re.search(r"variant:\s+(\S+)", output)
     if match_variant:
         variant = match_variant.group(1)
-        return '{layout} {variant}'.format(layout=layout, variant=variant)
+        return f'{layout} {variant}'
 
     return layout
 
 def default_x11_layouts():
     """Gets system's default layouts."""
-    code, output = subprocess.getstatusoutput(
-        "localectl list-x11-keymap-layouts")
+    full_cmd = f"{localectl_command} list-x11-keymap-layouts"
+    code, output = subprocess.getstatusoutput(full_cmd)
     if code != 0:
-        raise Exception("localectl list-x11-keymap-layouts failed")
+        raise Exception(f"'{full_cmd}' failed")
     return output
 
 def input_layouts():
@@ -62,7 +67,7 @@ def dmenu_setxkbmap(force_space_keymap=True):
     layouts_as_str = '\n'.join(in_layouts).encode('utf-8')
 
     # Call dmenu on our lists of layouts
-    proc = subprocess.run(['dmenu'] + sys.argv[1:],
+    proc = subprocess.run([dmenu_command] + sys.argv[1:],
                           input=layouts_as_str,
                           stdout=subprocess.PIPE)
 
@@ -70,8 +75,7 @@ def dmenu_setxkbmap(force_space_keymap=True):
         choice = proc.stdout.decode('utf-8').strip()
 
         # Call setxkbmap on selected choice
-        returncode, _ = subprocess.getstatusoutput('setxkbmap {layout}'.format(
-            layout=choice))
+        returncode, _ = subprocess.getstatusoutput(f'{setxkbmap_command} {choice}')
         success = (returncode == 0)
 
         if success and force_space_keymap:

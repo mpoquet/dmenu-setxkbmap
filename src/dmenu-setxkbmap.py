@@ -8,6 +8,7 @@ import sys
 
 dmenu_command = "dmenu"
 setxkbmap_command = "setxkbmap"
+xmodmap_command = "xmodmap"
 
 def current_layout():
     """Gets the current layout (as LAYOUT[ VARIANT])."""
@@ -71,7 +72,7 @@ def dmenu_setxkbmap(force_space_keymap=True):
 
         if success and force_space_keymap:
             # Force keymap of the space keycode
-            code, _ = subprocess.getstatusoutput('xmodmap -e "keycode 65 = space space space space underscore underscore space space"')
+            code, _ = subprocess.getstatusoutput(f'{xmodmap_command} -e "keycode 65 = space space space space underscore underscore space space"')
             success = (code == 0)
     else:
         success = False

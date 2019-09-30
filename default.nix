@@ -11,6 +11,7 @@ let
       buildInputs = with pkgs; [
         dmenu
         xorg.setxkbmap
+        xorg.xmodmap
         python3
         which
       ];
@@ -20,6 +21,7 @@ let
         # Patch runtime process dependencies
         sed -iE "sW\"dmenu\"W\"$(which dmenu)\"W" src/dmenu-setxkbmap.py
         sed -iE "sW\"setxkbmap\"W\"$(which setxkbmap)\"W" src/dmenu-setxkbmap.py
+        sed -iE "sW\"xmodmap\"W\"$(which xmodmap)\"W" src/dmenu-setxkbmap.py
       '';
       installPhase = "PREFIX=$out make install";
     };
